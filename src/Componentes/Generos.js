@@ -12,6 +12,7 @@ class Generos extends Component{
       generos: GenresService.getAll()
     }    
     this.eliminarGenero = this.eliminarGenero.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   eliminarGenero(genre)
@@ -27,19 +28,25 @@ class Generos extends Component{
     this.setState({generos: GenresService.getAll()})
   }
 
+  edit(genre)
+  {
+    console.log(genre)
+    this.props.history.push({pathname: '/EditarGenero/'+genre.id });
+  }
+
   render()
   {
     const cabecera = [{titulo: "Id", propiedad: "id"}, {titulo: "Nombre", propiedad: "name"}];    
     return (
-    <div class="col-sm-12">
-        <div class="row">
+    <div className="col-sm-12">
+        <div className="row">
           <h2> Géneros </h2>
         </div>
-      <div class="row">
+      <div className="row">
         <Link className="btn btn-primary" to="/CrearGeneros">Crear Género</Link>
       </div>
-      <div class="row">
-        <TablaGenerica lista= {this.state.generos} cabecera={cabecera} eliminar = {this.eliminarGenero}  />
+      <div className="row">
+        <TablaGenerica lista= {this.state.generos} cabecera={cabecera} edit = {this.edit} eliminar = {this.eliminarGenero}  />
       </div>
     </div>
     );

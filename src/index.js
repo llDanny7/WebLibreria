@@ -7,11 +7,11 @@ import Generos from './Componentes/Generos';
 import Libros from './Componentes/Libros';
 import Nav from './Componentes/Nav';
 import './style.css';
-import { HashRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import { HashRouter as Router, Route} from 'react-router-dom';
 
 const divBodyStyle= 
 {
-  "margin-top": '70px'
+  "marginTop": '70px'
 };
 class App extends Component {
   constructor() {
@@ -25,11 +25,11 @@ class App extends Component {
 
     return (
       <Router>        
-          <div class="row">
+          <div className="row">
             <Nav />
           </div>
 
-          <div class="row" style={divBodyStyle} >
+          <div className="row" style={divBodyStyle} >
             <Route path="/" exact component={Hello} />
             <Route path="/Generos/"  component={Generos} />
             <Route path="/Libros" component={Libros} />

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 
 class TablaGenerica extends Component {
   constructor(props) {
@@ -13,14 +12,20 @@ class TablaGenerica extends Component {
     eliminar(genero);
   }
 
+  editRow(genre)
+  {
+    const {edit} = this.props;
+    edit(genre)
+  }
+
   render() {
     const {lista, cabecera, } = this.props;
     return (
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>            
-            {cabecera.map(x => 
-              <th scope="col"> {x.titulo}</th>
+            {cabecera.map((x, index) => 
+              <th scope="col" key={index}> {x.titulo}</th>
               )}
           </tr>
         </thead>
@@ -29,8 +34,8 @@ class TablaGenerica extends Component {
           lista.map((x, indice) =>           
           <tr key={indice}>            
             {cabecera.map((cab, indice2) => <td key={indice+indice2}>{x[cab.propiedad]}</td>)}
-            <td key={indice}> 
-              <Link to={"/EditarGenero/"+x.id} className="btn btn-success">  Editar </Link> 
+            <td key={indice}>
+              <button className="btn btn-success" onClick= { () => this.editRow(x)} >Editar</button>               
               <button className="btn btn-danger" onClick={ () =>this.eliminarFila(x)}> Eliminar </button> 
             </td>
           </tr> )

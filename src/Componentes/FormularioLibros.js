@@ -1,66 +1,40 @@
 import React, { Component } from 'react'
 import Select from 'react-select';
+import {BookService} from '../Servicio/BookService'
+import {GenresService} from '../Servicio/GenresService'
 
-const options = [];
-  // { value: 'chocolate', label: 'Chocolate' },
-  // { value: 'strawberry', label: 'Strawberry' },
-  // { value: 'vanilla', label: 'Vanilla' }
+let options = [];
+
 class FormularioLibros extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      titulo: "",
-      precio: 0,
+      title: "",
+      price: 0,
       selectedOption:null    
     }
-    this.guardar = this.guardar.bind(this);
+    this.save = this.save.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
-    options = this.obtenerGeneros();
+    const listGenres = GenresService.getAll();
+    options = listGenres.map(genre => {return {value:genre.id, label: genre.name};});
   }
 
-  S4()
+  save()
   {
-    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
-  }
+    const {title, price, selectedOption} = this.state;
+    const idGenres = selectedOption.map( genre => genre.value);
 
-  obtenerGUID()
-  {
-    const guid = (this.S4() + this.S4() + "-" + this.S4() + "-4" + this.S4().substr(0,3) + "-" + this.S4() + "-" + this.S4() + this.S4() + this.S4()).toLowerCase();
-    return guid;
-  }
+    const book = {title: title, price: price, idGenres: idGenres};
+    const result = BookService.add(book);
 
-  obtenerGeneros()
-  {
-    const listaGeneros = JSON.parse(localStorage.getItem("Generos"));
-    debugger
-    if (listaGeneros == null)
-      listaGeneros = [];
-    const listaGenerosSelect = listaGeneros.map(genero => {return {value:genero.id, label: genero.name};});
-    return listaGenerosSelect;
-  }
-
-  existeLibro(listaLibros, titulo)
-  {
-    return listaLibros.some(x => x.titulo === titulo);
-  }
-
-  guardar()
-  {
-    // console.log(selectedOption)
-    let listaLibros = JSON.parse(localStorage.getItem("LIBROS"));
-    if (listaLibros == null) listaLibros = [];
-
-    if (this.existeLibro(listaLibros, this.state.titulo))
-    {
-      alert("Ya existe el libroa");
-      return false;
+    alert(result.message);
+    if (!result.isOk)
+    {      
+      return;
     }
-    listaLibros.push({id:this.obtenerGUID(), titulo: this.state.titulo, precio: this.state.precio})
-    localStorage.setItem("LIBROS", JSON.stringify(listaLibros));
-    alert("Se ha añadido el libro correctamente")
-    this.props.history.push('/Libros');
-
+    this.props.history.push("/Libros");
   }
+
   changeHandler(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -73,18 +47,18 @@ class FormularioLibros extends Component {
   render() {
     const { selectedOption } = this.state;
     return (
-      <form class="col-sm-12">
-        <div class="form-group">
-          <label for="titulo">Libro</label>
-          <input name="titulo" value={this.state.titulo} type="text" class="form-control" aria-describedby="emailHelp" onChange={this.changeHandler} />
+      <form className="col-sm-12">
+        <div className="form-group">
+          <label htmlFor="title">Libro</label>
+          <input name="title" value={this.state.title} type="text" className="form-control" aria-describedby="emailHelp" onChange={this.changeHandler} />
         </div>
-        <div class="form-group">
-          <label for="precio">Precio</label>
-          <input name="precio" value={this.state.precio} type="numeric" class="form-control" onChange={this.changeHandler} />
+        <div className="form-group">
+          <label htmlFor="price">Precio</label>
+          <input name="price" value={this.state.price} type="numeric" className="form-control" onChange={this.changeHandler} />
         </div>
 
-        <div class="form-group">
-          <label for="precio">Genero</label>
+        <div className="form-group">
+          <label htmlFor="precio">Genero</label>
           <Select            
             isMulti
             name="colors"
@@ -97,7 +71,7 @@ class FormularioLibros extends Component {
         </div>
 
          
-        <button type="button" class="btn btn-primary" onClick={this.guardar}>Guardar</button>
+        <button type="button" className="btn btn-primary" onClick={this.save}>Guardar</button>
       </form>
     );
   }

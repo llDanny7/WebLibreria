@@ -22,14 +22,15 @@ class GenresServiceBBDD
   {
     let listGenres = this.getAll();
     let genre = listGenres.find(x => x.id === id);
-    if (genre == undefined)
+    if (genre === undefined)
       return {isOk: false, message: 'Error. No se ha encontrado el género.'}
     
-    listGenres  = listGenres.filter(x => x.id != id);
+    listGenres  = listGenres.filter(x => x.id !== id);
     localStorage.setItem(nameLocalStorage, JSON.stringify(listGenres));
 
     return {isOk: true, message: 'El género se ha eliminado correctamente'};
   }
+
   edit(genre)
   {
     if (this.existGender(genre))
@@ -37,13 +38,14 @@ class GenresServiceBBDD
       return {isOk:false, message:"El género ya existe"};
     }
     let listGenres = this.getAll();
-    let genreBBDD = listGenres.find(x => x.id == genre.id);
-    if (genreBBDD == undefined)
+    let genreBBDD = listGenres.find(x => x.id === genre.id);
+    if (genreBBDD === undefined)
       return {isOk: false, message: 'Error. No se ha encontrado el género.'}    
     genreBBDD.name = genre.name
     localStorage.setItem(nameLocalStorage, JSON.stringify(listGenres));
     return {isOk: true, message: 'El género se ha actualizado correctamente.'}    
   }
+
   add(genres)
   {    
     if (this.existGender(genres))
@@ -63,7 +65,7 @@ class GenresServiceBBDD
     let existGender = false;
     if (listGenres!=null)
     {
-      existGender = listGenres.some(x => x.name == genres.name);
+      existGender = listGenres.some(x => x.name === genres.name);
     }
     return existGender;    
   }

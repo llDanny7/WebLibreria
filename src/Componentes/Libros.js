@@ -1,46 +1,49 @@
 import React, { Component } from 'react'
 import TablaGenerica from './TablaGenerica'
 import {Link} from 'react-router-dom';
+import {BookService} from '../Servicio/BookService'
 
 class Libros extends Component {
   constructor(props)
   {
     super(props);
     this.state={
-      libros: this.obtenerLibros()
+      libros: BookService.getAll()
     }
-    this.eliminarLibro = this.eliminarLibro.bind(this);
-  }
-  eliminarLibro(libro) {
-    let listaLibros = JSON.parse(localStorage.getItem("LIBROS"));
-    if (listaLibros == null) {
-      alert("Error. No existe el libro");
-      return false;
-    }
-    listaLibros = listaLibros.filter(g => g.titulo !== libro.titulo);
-    localStorage.setItem("LIBROS", JSON.stringify(listaLibros));
-
-    this.setState({libros: this.obtenerLibros()})
+    this.delete = this.delete.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
-  obtenerLibros() {
-    let listaLibros = JSON.parse(localStorage.getItem("LIBROS"));
-    if (listaLibros == null) listaLibros = [];
-    return listaLibros;
+  delete(book)
+  {
+    const result = BookService.deleteById(book.id);
+
+    alert(result.message);
+    if (!result.isOk)
+    {
+      return;
+    }
+
+    this.setState({libros: BookService.getAll()})
   }
+
+  edit()
+  {
+    alert("No se ha implementado de momento");
+  }
+
   render() {
-    const cabecera = [{ titulo: "Id", propiedad: "id" }, { titulo: "Titulo", propiedad: "titulo" }, { titulo: "Precio", propiedad: "precio" }];    
-    console.log("cuantas veces entra")
+    const cabecera = [{ titulo: "Id", propiedad: "id" }, { titulo: "Titulo", propiedad: "title" }, { titulo: "Precio", propiedad: "price" }];    
     return (
-      <div class="col-sm-12">
-        <div class="row">
+      <div className="col-sm-12">
+        <div className="row">
           <h2> Libros </h2>
         </div>
-        <div class="row">
+        <div className="row">
           <Link className="btn btn-primary" to="/CrearLibros">Crear Libro</Link>
         </div>
-        <div class="row">
-          <TablaGenerica lista={this.state.libros} cabecera={cabecera} eliminar={this.eliminarLibro} />
+        <div className="row">
+          <TablaGenerica lista={this.state.libros} cabecera={cabecera} eliminar={this.delete} edit = {this.edit} />
         </div>
       </div>
     );
