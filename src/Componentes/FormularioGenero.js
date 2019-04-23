@@ -19,9 +19,8 @@ class FormularioGenero extends Component {
 
   getGenreById(idGenre)
   {
-    const genre = GenresService.getById(idGenre);
-    
-    if (genre === undefined)
+    const genre = GenresService.getById(idGenre);    
+    if (genre === undefined || genre === null)
       return {name: "", id: undefined};
     return genre;
   }
