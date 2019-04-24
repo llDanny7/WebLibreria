@@ -8,30 +8,55 @@ let options = [];
 class FormularioLibros extends Component {
   constructor(props) {
     super(props);
+
+    const listGenres = GenresService.getAll();
+    options = listGenres.map(genre => {return {value:genre.id, label: genre.name};});
+
+    const book = this.getBookById(props.match.params.id, options);
     this.state = {
-      title: "",
-      price: 0,
-      selectedOption:null    
+      title: book.title,
+      price: book.price,
+      description: book.description,
+      selectedOption: book.selectedOption,
+      id: book.id
     }
     this.save = this.save.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
-    const listGenres = GenresService.getAll();
-    options = listGenres.map(genre => {return {value:genre.id, label: genre.name};});
+    this.getBookById = this.getBookById.bind(this);
+  
   }
 
+  getBookById(id, options)
+  {
+    const book = BookService.getById(id);
+    if (book === undefined || book === null)
+      return {title: "", price: 0, description: "",selectedOption: null, id: null}
+    
+    book.selectedOption = book.idGenres.map(idGenre => options.find(x => x.value === idGenre));  
+    return book;
+  }
+
+  isValidBook(title, selectedOption)
+  {
+    return title !== "" && selectedOption !== undefined && selectedOption.length > 0;
+  }
   save()
   {
-    const {title, price, selectedOption} = this.state;
-    const idGenres = selectedOption.map( genre => genre.value);
-
-    const book = {title: title, price: price, idGenres: idGenres};
-    const result = BookService.add(book);
-
-    alert(result.message);
-    if (!result.isOk)
-    {      
+    const {title, price, description, selectedOption, id} = this.state;
+    if (!this.isValidBook(title, selectedOption))
+    {
+      alert("Los datos son invalidos");
       return;
     }
+
+    const idGenres = selectedOption.map( genre => genre.value);
+    const book = {title: title, price: price, description: description, idGenres: idGenres, id: id};
+    const result = (id === null)? BookService.add(book) : BookService.edit(book);
+    
+    alert(result.message);
+    if (!result.isOk)         
+      return;
+    
     this.props.history.push("/Libros");
   }
 
@@ -52,6 +77,10 @@ class FormularioLibros extends Component {
           <label htmlFor="title">Libro</label>
           <input name="title" value={this.state.title} type="text" className="form-control" aria-describedby="emailHelp" onChange={this.changeHandler} />
         </div>
+        <div className="form-group">
+          <label htmlFor="description">Descripción</label>
+          <input name="description" value={this.state.description} type="text" className="form-control" aria-describedby="emailHelp" onChange={this.changeHandler} />
+        </div>        
         <div className="form-group">
           <label htmlFor="price">Precio</label>
           <input name="price" value={this.state.price} type="numeric" className="form-control" onChange={this.changeHandler} />

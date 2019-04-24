@@ -27,9 +27,9 @@ class Libros extends Component {
     this.setState({libros: BookService.getAll()})
   }
 
-  edit()
-  {
-    alert("No se ha implementado de momento");
+  edit(book)
+  {    
+    this.props.history.push({pathname: '/EditarLibro/'+book.id });
   }
 
   render() {

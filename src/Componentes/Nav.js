@@ -18,13 +18,13 @@ export default class Nav extends Component {
                   <Link className="nav-link js-scroll-trigger" to='/'> Home </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link js-scroll-trigger" to='/Generos'> Generos </Link>
+                  <Link className="nav-link js-scroll-trigger" to='/Generos'> Admin. Generos </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link js-scroll-trigger" to='/Libros'> Libros </Link>
+                  <Link className="nav-link js-scroll-trigger" to='/Libros'> Admin. Libros </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                  <Link className="nav-link js-scroll-trigger" to='/LibrosHome'> Libros </Link>
                 </li>
               </ul>
             </div>

@@ -33,15 +33,19 @@ class BookServiceBBDD
     
     edit(book)
     {
-      if (this.existBook(book))
-      {
-        return {isOk:false, message:"El libro ya existe"};
-      }
       let listBooks = this.getAll();
       let bookBBDD = listBooks.find(x => x.id === book.id);
       if (bookBBDD === undefined)
-        return {isOk: false, message: 'Error. No se ha encontrado el libro.'}    
-        bookBBDD.name = book.name
+        return {isOk: false, message: 'Error. No se ha encontrado el libro.'};
+      
+      if (book.title !== bookBBDD.title && this.existBook(book))
+      {
+        return {isOk:false, message:"El libro ya existe"};
+      }      
+      bookBBDD.title = book.title
+      bookBBDD.price = book.price
+      bookBBDD.idGenres = book.idGenres
+      bookBBDD.description = book.description
       localStorage.setItem(nameLocalStorage, JSON.stringify(listBooks));
       return {isOk: true, message: 'El libro se ha actualizado correctamente.'}    
     }

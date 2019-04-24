@@ -5,6 +5,7 @@ import FormularioGenero from './Componentes/FormularioGenero';
 import FormularioLibros from './Componentes/FormularioLibros';
 import Generos from './Componentes/Generos';
 import Libros from './Componentes/Libros';
+import ListBook from './Componentes/ListBook';
 import Nav from './Componentes/Nav';
 import './style.css';
 import { HashRouter as Router, Route} from 'react-router-dom';
@@ -31,11 +32,13 @@ class App extends Component {
 
           <div className="row" style={divBodyStyle} >
             <Route path="/" exact component={Hello} />
+            <Route path="/LibrosHome" exact component={ListBook} />
             <Route path="/Generos/"  component={Generos} />
             <Route path="/Libros" component={Libros} />
             <Route path="/CrearGeneros" component={FormularioGenero} />
             <Route path="/EditarGenero/:id" component={FormularioGenero} />
             <Route path="/CrearLibros" component={FormularioLibros} />
+            <Route path="/EditarLibro/:id" component={FormularioLibros} />
           </div>        
       </Router>
     );

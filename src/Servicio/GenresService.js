@@ -33,14 +33,16 @@ class GenresServiceBBDD
 
   edit(genre)
   {
-    if (this.existGender(genre))
-    {
-      return {isOk:false, message:"El género ya existe"};
-    }
+
     let listGenres = this.getAll();
     let genreBBDD = listGenres.find(x => x.id === genre.id);
     if (genreBBDD === undefined)
       return {isOk: false, message: 'Error. No se ha encontrado el género.'}    
+
+    if (genre.name !== genreBBDD.name && this.existGender(genre))
+    {
+      return {isOk:false, message:"El género ya existe"};
+    }      
     genreBBDD.name = genre.name
     localStorage.setItem(nameLocalStorage, JSON.stringify(listGenres));
     return {isOk: true, message: 'El género se ha actualizado correctamente.'}    

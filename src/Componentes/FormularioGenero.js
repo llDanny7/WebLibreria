@@ -12,7 +12,7 @@ class FormularioGenero extends Component {
       id: genre.id
     }
     
-    this.guardarGenero = this.guardarGenero.bind(this);
+    this.save = this.save.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
     this.getGenreById = this.getGenreById.bind(this);
   }
@@ -21,7 +21,7 @@ class FormularioGenero extends Component {
   {
     const genre = GenresService.getById(idGenre);    
     if (genre === undefined || genre === null)
-      return {name: "", id: undefined};
+      return {name: "", id: null};
     return genre;
   }
 
@@ -31,19 +31,15 @@ class FormularioGenero extends Component {
       const value = event.target.value;
       this.setState({[name]:value});
   }
-  guardarGenero()
-  {
-    let genre = {name: this.state.name};
-    let result = null;
-    if (this.state.id === undefined)
-      result = GenresService.add(genre);
-    else{
-      genre.id = this.state.id;
-      result = GenresService.edit(genre)
-    }
 
+  save()
+  {
+    const genre = {name: this.state.name, id: this.state.id};
+
+    const result = (genre.id === null)? GenresService.add(genre) : GenresService.edit(genre);
     alert(result.message);
-    if (!result.isOk) return false;    
+    if (!result.isOk) 
+      return false;    
     
     this.props.history.push('/Generos');    
   }
@@ -57,7 +53,7 @@ class FormularioGenero extends Component {
           <label htmlFor="exampleInputEmail1">Genero</label>
           <input name="name" value={this.state.name} type="text" className="form-control" id="genero" aria-describedby="emailHelp" onChange={this.changeHandler}/>          
         </div>
-        <button type="button" className="btn btn-primary" onClick={this.guardarGenero}>Guardar</button>
+        <button type="button" className="btn btn-primary" onClick={this.save}>Guardar</button>
       </form>
     );
   }
