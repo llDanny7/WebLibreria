@@ -1,13 +1,13 @@
 {
   "main.css": "/WebLibreria/static/css/main.2e27fff3.chunk.css",
-  "main.js": "/WebLibreria/static/js/main.f67a4d01.chunk.js",
-  "main.js.map": "/WebLibreria/static/js/main.f67a4d01.chunk.js.map",
+  "main.js": "/WebLibreria/static/js/main.b8b3f708.chunk.js",
+  "main.js.map": "/WebLibreria/static/js/main.b8b3f708.chunk.js.map",
   "runtime~main.js": "/WebLibreria/static/js/runtime~main.dbf0610e.js",
   "runtime~main.js.map": "/WebLibreria/static/js/runtime~main.dbf0610e.js.map",
-  "static/js/2.ff01f2a4.chunk.js": "/WebLibreria/static/js/2.ff01f2a4.chunk.js",
-  "static/js/2.ff01f2a4.chunk.js.map": "/WebLibreria/static/js/2.ff01f2a4.chunk.js.map",
+  "static/js/2.c0f07e90.chunk.js": "/WebLibreria/static/js/2.c0f07e90.chunk.js",
+  "static/js/2.c0f07e90.chunk.js.map": "/WebLibreria/static/js/2.c0f07e90.chunk.js.map",
   "index.html": "/WebLibreria/index.html",
-  "precache-manifest.2960c55c54e40c4fbd26da4e22cd93d8.js": "/WebLibreria/precache-manifest.2960c55c54e40c4fbd26da4e22cd93d8.js",
+  "precache-manifest.eff4c75768ce179d5109bdc7f670fa58.js": "/WebLibreria/precache-manifest.eff4c75768ce179d5109bdc7f670fa58.js",
   "service-worker.js": "/WebLibreria/service-worker.js",
   "static/css/main.2e27fff3.chunk.css.map": "/WebLibreria/static/css/main.2e27fff3.chunk.css.map"
 }
