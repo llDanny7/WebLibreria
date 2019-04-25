@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "96ec98eaa06cc27db29b",
-    "url": "/WebLibreria/static/css/main.2e27fff3.chunk.css"
+    "revision": "f21f23878a545f3de0c3",
+    "url": "/WebLibreria/static/css/main.4a605a0e.chunk.css"
   },
   {
-    "revision": "96ec98eaa06cc27db29b",
-    "url": "/WebLibreria/static/js/main.b8b3f708.chunk.js"
+    "revision": "f21f23878a545f3de0c3",
+    "url": "/WebLibreria/static/js/main.1ff34f73.chunk.js"
   },
   {
     "revision": "e6be91598017a43c632b",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/WebLibreria/static/js/2.c0f07e90.chunk.js"
   },
   {
-    "revision": "52e5fcb07c919ac0129a80760e4e55b1",
+    "revision": "17e0e6224265764b8c25aac0373d974b",
     "url": "/WebLibreria/index.html"
   }
 ];
