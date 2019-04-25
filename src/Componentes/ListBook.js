@@ -20,7 +20,9 @@ class ListBook extends Component
             <div className="row">
                 {
                     books.map( (book, key) =>
-                        <Book key={key} book={book}></Book>
+                        <div key={key} className="col-sm-4">
+                            <Book  book={book}></Book>
+                        </div>
                     )
                 }
             </div>

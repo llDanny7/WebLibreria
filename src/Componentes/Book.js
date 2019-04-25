@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
+import '../Css/Card.css'
 
 class Book extends Component {
     render() {
         const { book } = this.props;
         return (
-            <div className="card" >
-                <img className="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Book_icoline.svg" alt="Card image cap" />
-                <div className="card-body">
-                    <h5 className="card-title"> {book.title}</h5>
-                    <p className="card-text"> {book.description}</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
+            <div className="card-content">
+                <div className="card-img">
+                    <img src="https://placeimg.com/380/230/nature" alt="" />
+                    <span><h4>{book.title}</h4></span>
+                </div>
+                <div className="card-desc">
+                    <h3>{book.title}</h3>
+                    <p>{book.description}</p>
+                    <a href="#" className="btn-card">Read</a>
                 </div>
             </div>
         );
