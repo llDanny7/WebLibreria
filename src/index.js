@@ -30,7 +30,7 @@ class App extends Component {
             <Nav />
           </div>
 
-          <div className="row" style={divBodyStyle} >
+          <div style={divBodyStyle} >
             <Route path="/" exact component={Hello} />
             <Route path="/LibrosHome" exact component={ListBook} />
             <Route path="/Generos/"  component={Generos} />

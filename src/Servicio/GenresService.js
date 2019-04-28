@@ -67,7 +67,7 @@ class GenresServiceBBDD
     let existGender = false;
     if (listGenres!=null)
     {
-      existGender = listGenres.some(x => x.name === genres.name);
+      existGender = listGenres.some(x => x.name.toLowerCase() === genres.name.toLowerCase());
     }
     return existGender;    
   }

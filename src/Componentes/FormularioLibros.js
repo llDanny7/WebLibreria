@@ -38,7 +38,8 @@ class FormularioLibros extends Component {
 
   isValidBook(title, selectedOption)
   {
-    return title !== "" && selectedOption !== undefined && selectedOption.length > 0;
+    debugger
+    return title !== "" && (selectedOption !== undefined && selectedOption !== null )&& selectedOption.length > 0;
   }
   save()
   {

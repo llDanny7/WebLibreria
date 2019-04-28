@@ -69,7 +69,7 @@ class BookServiceBBDD
       let existBook = false;
       if (listBooks!=null)
       {
-        existBook = listBooks.some(x => x.title === book.title);
+        existBook = listBooks.some(x => x.title.toLowerCase() === book.title.toLowerCase());
       }
       return existBook;    
     }
